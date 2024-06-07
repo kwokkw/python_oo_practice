@@ -1,22 +1,29 @@
 # Inheritance
 from wordfinder import WordFinder
+from random import choice
 
 
 class SpecialWordFinder(WordFinder):
+    """Specialized Word Finder that excludes blank lines and comment that's start with # symbol.
 
-    def __init__(self, file):
-        super().__init__(file)
+    >>> swf = SpecialWordFinder("complex.txt")
+    3 words read
 
-    def read_file(self):
-        content = super().read_file()
-        content = [word for word in content if word and not word.startswith("#")]
+    >>> swf.random() in ["pear", "carrot", "kale"]
+    True
 
-        # print(content)
-        return content
+    >>> swf.random() in ["pear", "carrot", "kale"]
+    True
 
-    def random(self):
-        return super().random()
+    >>> swf.random() in ["pear", "carrot", "kale"]
+    True
+    """
+
+    def read_file(self, file):
+        return [
+            word.strip() for word in file if word.strip() and not word.startswith("#")
+        ]
 
 
 f = SpecialWordFinder("new_words.txt")
-print(f.random())
+# print(f)

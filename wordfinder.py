@@ -1,4 +1,4 @@
-import random
+from random import choice
 
 
 class WordFinder:
@@ -20,20 +20,19 @@ class WordFinder:
     """
 
     def __init__(self, file):
-        self.file = file
+        with open(file, "r") as file:
+            self.words = self.read_file(file)
+        print(f"{len(self.words)} words read")
 
-    def read_file(self):
-        with open(self.file, "r") as file:
-            content = [word.strip() for word in file.readlines()]
-        return content
+    def read_file(self, file):
+        return [word.strip() for word in file]
 
     def random(self):
-        content = self.read_file()
-        return random.choice(content)
+        return choice(self.words)
 
 
-rand_word = WordFinder("words.txt")
-# print(rand_word.random())
+# rand_word = WordFinder("words.txt")
+# print(rand_word)
 
 """ NOTE
 

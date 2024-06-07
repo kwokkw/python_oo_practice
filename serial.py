@@ -19,19 +19,26 @@ class SerialGenerator:
 
     >>> serial.generate()
     100
+
+    >>> serial
+    <SerialGenerator start=100 next=101>
     """
 
     def __init__(self, start):
         self.start = start
-        self.current_num = start
+        self.next_number = start
+
+    def __repr__(self):
+        return f"<SerialGenerator> start={self.start} next={self.next_number}"
 
     def generate(self):
-        serial_number = self.current_num
-        self.current_num += 1  # Prepares for the next call
+        self.next_number += 1  # Prepares for the next call
+        serial_number = self.next_number - 1
         return serial_number
 
     def reset(self):
-        self.current_num = self.start
+        self.next_number = self.start
+        return self.next_number
 
 
 serial = SerialGenerator(start=100)
@@ -40,7 +47,8 @@ print(serial.generate())
 print(serial.generate())
 print(serial.generate())
 print(serial.reset())
-print(serial.generate())
+print(serial)
+# print(serial.generate())
 
 """ NOTE
 
